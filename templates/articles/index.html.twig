@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% block title %}Welcome
+{% endblock %}
+{% block body %}
+	<h1>Articles</h1>
+	{% if articles %}
+		<table class="table table-striped">
+			<thead>
+				<tr>Article title</tr>
+				<tr>Actions</tr>
+			</thead>
+			<tbody>
+				{% for article in articles %}
+					<tr>
+						<td>{{ article }}</td>
+						<td>
+							<a href="/symphart/public/article/1" class="btn btn-dark">Show</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<h2>No articles to display</h2>
+	{% endif %}
+{% endblock %}
