@@ -11,40 +11,41 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class ArticleController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="article_list")
      * Method({"GET"})
      */
     public function index()
     {
-        $artciles = ['Article 1', 'Article 2'];
-        // return new Response('<html><body><h1>Hello</h1></body></html>');
+        $artciles = $this->getDoctrine()->getRepository(Article::class)->findAll();
         return $this->render('articles/index.html.twig', array(
             'articles' => $artciles
         ));
     }
 
     /**
-     * @Route("/test")
+     * @Route("/article/{id}", name="article_show")
      */
-    public function index1()
+
+    public function show($id)
     {
-        return new Response('<html><body><h1>Hello</h1></body></html>');
+        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+        return $this->render('articles/show.html.twig', array('article' => $article));
     }
 
-    /**
-     * @Route("/article/save")
-     */
-    public function save()
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-        $artcile = new Article();
-        $artcile->setTitle('Article one');
-        $artcile->setBody('Body for article one');
+    // /**
+    //  * @Route("/article/save")
+    //  */
+    // public function save()
+    // {
+    //     $entityManager = $this->getDoctrine()->getManager();
+    //     $artcile = new Article();
+    //     $artcile->setTitle('Article one');
+    //     $artcile->setBody('Body for article one');
 
-        $entityManager->persist($artcile);
+    //     $entityManager->persist($artcile);
 
-        $entityManager->flush();
+    //     $entityManager->flush();
 
-        return new Response('Saved an article with id of ' . $artcile->getId());
-    }
+    //     return new Response('Saved an article with id of ' . $artcile->getId());
+    // }
 }
