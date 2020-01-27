@@ -115,7 +115,6 @@ class ArticleController extends AbstractController
     //     $entityManager->persist($artcile);
 
     //     $entityManager->flush();
-
     //     return new Response('Saved an article with id of ' . $artcile->getId());
     // }
 }
